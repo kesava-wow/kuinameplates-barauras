@@ -1,10 +1,13 @@
 local addon = KuiNameplates
 local kui = LibStub('Kui-1.0')
+
 local mod = addon:NewPlugin('BarAuras',101,2)
+if not mod then return end
 
 local orig_SetFont
 local orig_UpdateCooldown
 
+-- local functions #############################################################
 local auras_sort = function(a,b)
     -- we have to recreate this base sorting function to maintain
     -- definitive sorting, since we're replacing ArrangeButtons
@@ -17,8 +20,6 @@ local auras_sort = function(a,b)
     end
     return a.parent.sort(a,b)
 end
-
--- scripts #####################################################################
 local function FadeSpark(self,val)
     if val >= 7 then
         self.spark:SetAlpha(0)
