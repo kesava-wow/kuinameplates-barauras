@@ -5,8 +5,9 @@ local mod = addon:NewPlugin('BarAuras',101,2)
 if not mod then return end
 
 local BAR_HEIGHT = 14
-local BAR_COLOUR = { .3, .4, .8 }
-local BAR_TEXTURE = 'interface/addons/kui_media/t/bar-small'
+local BAR_SPACING = -1
+local BAR_COLOUR = { .4, .4, .7 }
+local BAR_TEXTURE = 'interface/addons/kui_media/t/bar'
 
 local ICON_SIZE = BAR_HEIGHT - 2
 local SPARK_COLOUR = { kui.Brighten(.3,unpack(BAR_COLOUR)) }
@@ -98,7 +99,7 @@ function ArrangeButtons(self)
                 if not prev then
                     button:SetPoint(self.point[1])
                 else
-                    button:SetPoint('BOTTOMLEFT',prev,'TOPLEFT',0,-1)
+                    button:SetPoint('BOTTOMLEFT',prev,'TOPLEFT',0,BAR_SPACING)
                 end
 
                 prev = button
