@@ -14,6 +14,7 @@ local SPARK_COLOUR = { kui.Brighten(.3,unpack(BAR_COLOUR)) }
 
 local orig_SetFont
 local orig_UpdateCooldown
+local orig_PostUpdateFrame
 
 -- local functions #############################################################
 local auras_sort = function(a,b)
@@ -202,9 +203,23 @@ local function PostCreateAuraFrame(frame)
         frame.SetIconSize = AuraFrame_SetIconSize
     end
 end
+local function PostUpdateAuraFrame(frame)
+    orig_PostUpdateFrame(frame)
+
+    -- correct frame height for purge
+    if frame.id == 'core_dynamic' and frame.visible then
+        frame:SetHeight(
+            (BAR_HEIGHT*frame.visible) +
+            (BAR_SPACING*(frame.visible-1))
+        )
+    end
+end
 -- register ####################################################################
 function mod:Initialise()
     self:AddCallback('Auras','ArrangeButtons',ArrangeButtons)
     self:AddCallback('Auras','PostCreateAuraButton',PostCreateAuraButton)
     self:AddCallback('Auras','PostCreateAuraFrame',PostCreateAuraFrame)
+
+    orig_PostUpdateFrame = core.Auras_PostUpdateAuraFrame
+    core.Auras_PostUpdateAuraFrame = PostUpdateAuraFrame
 end
