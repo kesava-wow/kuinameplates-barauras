@@ -131,8 +131,9 @@ local function PostCreateAuraButton(frame,button)
     spark:SetDrawLayer('ARTWORK',3)
     spark:SetVertexColor(unpack(SPARK_COLOUR))
     spark:SetTexture('Interface\\AddOns\\Kui_Media\\t\\spark')
-    spark:SetPoint('CENTER', bar:GetRegions(), 'RIGHT', 0, 0)
-    spark:SetSize(6,20)
+    spark:SetPoint('TOP',bar:GetStatusBarTexture(),'TOPRIGHT',-1,4)
+    spark:SetPoint('BOTTOM',bar:GetStatusBarTexture(),'BOTTOMRIGHT',-1,-4)
+    spark:SetWidth(12)
 
     bar.spark = spark
     bar:HookScript('OnValueChanged',FadeSpark)
