@@ -1,7 +1,7 @@
 ## Interface: 80000
 ## Author: Kesava
 ## Title: Kui |cff9966ffNameplates:|r |cffffffffCore BarAuras|r
-## Notes: Makes auras display as progress bars (for Core layout only)
+## Notes: Makes auras display as progress bars
 ## Dependencies: Kui_Nameplates_Core
 
 mod.lua
