@@ -1,7 +1,8 @@
 local addon = KuiNameplates
+local core = KuiNameplatesCore
 local kui = LibStub('Kui-1.0')
 
-local mod = addon:NewPlugin('BarAuras',101,2)
+local mod = addon:NewPlugin('BarAuras',101,3)
 if not mod then return end
 
 local BAR_HEIGHT = 14
