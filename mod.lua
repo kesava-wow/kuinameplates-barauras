@@ -195,18 +195,10 @@ local function AuraFrame_SetIconSize(frame)
         end
     end
 end
-local function AuraFrame_OnUpdate(frame)
-    -- enforce frame size & position
-    frame:SetPoint('BOTTOMLEFT',frame.parent.bg,'TOPLEFT',0,15)
-    frame:SetPoint('BOTTOMRIGHT',frame.parent.bg,'TOPRIGHT')
-end
 local function PostCreateAuraFrame(frame)
     if frame.id == 'core_dynamic' then
         frame.squareness = 1
-        frame.size = 12
-
         frame.SetIconSize = AuraFrame_SetIconSize
-        frame:HookScript('OnUpdate',AuraFrame_OnUpdate)
     end
 end
 -- register ####################################################################
