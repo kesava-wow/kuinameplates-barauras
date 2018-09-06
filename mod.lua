@@ -4,6 +4,13 @@ local kui = LibStub('Kui-1.0')
 local mod = addon:NewPlugin('BarAuras',101,2)
 if not mod then return end
 
+local BAR_HEIGHT = 14
+local BAR_COLOUR = { .3, .4, .8 }
+local BAR_TEXTURE = 'interface/addons/kui_media/t/bar-small'
+
+local ICON_SIZE = BAR_HEIGHT - 2
+local SPARK_COLOUR = { kui.Brighten(.3,unpack(BAR_COLOUR)) }
+
 local orig_SetFont
 local orig_UpdateCooldown
 
@@ -112,15 +119,15 @@ local function PostCreateAuraButton(frame,button)
     bar:SetPoint('TOPLEFT',button.icon,'TOPRIGHT',1,0)
     bar:SetPoint('BOTTOMLEFT',button.icon,'BOTTOMRIGHT')
     bar:SetPoint('RIGHT',button,'RIGHT',-1,0)
-    bar:SetStatusBarTexture(kui.m.t.sbar)
-    bar:SetStatusBarColor(.3,.4,.8)
+    bar:SetStatusBarTexture(BAR_TEXTURE)
+    bar:SetStatusBarColor(unpack(BAR_COLOUR))
     bar:SetMinMaxValues(0,10)
     bar:Hide()
     button.bar = bar
 
     local spark = bar:CreateTexture(nil,'ARTWORK')
     spark:SetDrawLayer('ARTWORK',3)
-    spark:SetVertexColor(.6,.7,1)
+    spark:SetVertexColor(unpack(SPARK_COLOUR))
     spark:SetTexture('Interface\\AddOns\\Kui_Media\\t\\spark')
     spark:SetPoint('CENTER', bar:GetRegions(), 'RIGHT', 0, 0)
     spark:SetSize(6,20)
@@ -152,9 +159,9 @@ local function PostCreateAuraButton(frame,button)
     button.count:SetJustifyH('RIGHT')
     button.count.fontobject_small = nil
 
-    button:SetHeight(14)
+    button:SetHeight(BAR_HEIGHT)
 
-    button.icon:SetSize(12,12)
+    button.icon:SetSize(ICON_SIZE,ICON_SIZE)
     button.icon:ClearAllPoints()
     button.icon:SetPoint('BOTTOMLEFT',1,1)
     button.icon:SetTexCoord(.1,.9,.1,.9)
@@ -172,7 +179,7 @@ local function PostCreateAuraButton(frame,button)
     button.cd:SetFont(button.cd:GetFont())
 end
 local function AuraFrame_SetIconSize(frame)
-    frame.size = 14
+    frame.size = BAR_HEIGHT
     frame.icon_height = frame.size
     frame.icon_ratio = 0
 
